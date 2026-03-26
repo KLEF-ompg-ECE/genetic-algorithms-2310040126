@@ -1,10 +1,9 @@
 # Assignment 2 — Genetic Algorithm: Knapsack Problem
 ## Observation Report
 
-**Student Name  :** ___________________________  
-**Student ID    :** ___________________________  
-**Date Submitted:** ___________________________  
-
+**Student Name  :** GORLE SANJANA 
+**Student ID    :** 2310040126
+**Date Submitted:** 26-03-2026
 ---
 
 ## How to Submit
@@ -23,23 +22,23 @@ Open `ga_knapsack.py` and read through it. Then answer these questions.
 **Q1. What does the `fitness()` function return? Why does an overweight solution score 0?**
 
 ```
-[ YOUR ANSWER — 2 to 3 sentences ]
+[The fitness() function returns the total value of selected items if the total weight is within the allowed limit. If the weight exceeds 15 kg, it returns 0. This ensures invalid solutions are penalized so the algorithm avoids overweight combinations. ]
 ```
 
 **Q2. What does `tournament_select()` do? Why are higher-fitness individuals more likely to be chosen?**
 
 ```
-[ YOUR ANSWER — 2 to 3 sentences ]
+[ tournament_select() randomly selects a few individuals and picks the one with the highest fitness. This increases the probability of selecting better solutions while still allowing some randomness. Hence, stronger individuals are more likely to reproduce.]
 ```
 
 **Q3. Look at the `run_ga()` loop. Find this line:**
 ```python
-next_gen = [best_chromosome[:]]
+ [next_gen = [best_chromosome[:]]]
 ```
 **What is this doing? Why is it important to always keep the best solution?**
 
 ```
-[ YOUR ANSWER — 2 to 3 sentences ]
+[ This line ensures that the best solution from the current generation is directly carried to the next generation. This is called elitism. It prevents losing the best solution due to crossover or mutation, helping the algorithm converge faster. ]
 ```
 
 ---
@@ -55,21 +54,37 @@ python ga_knapsack.py
 
 | Metric | Your result |
 |--------|-------------|
-| Number of generations | |
-| Best value at generation 1 | |
-| Final best value | |
-| Total weight of best solution (kg) | |
-| Is solution valid (Yes / No) | |
+| Number of generations |50 |
+| Best value at generation 1 |60 |
+| Final best value | 77|
+| Total weight of best solution (kg) |14.4 |
+| Is solution valid (Yes / No) |Yes |
 
 **Copy the printed packing list here:**
 ```
-[ PASTE PACKING LIST OUTPUT HERE ]
+[   Best Packing List
+--------------------------------------
+  + Water bottle
+  + First aid kit
+  + Tent
+  + Sleeping bag
+  + Torch
+  + Energy bars (x6)
+  + Rain jacket
+  + Map & compass
+  + Power bank
+--------------------------------------
+  Weight : 14.4 / 15.0 kg
+  Value  : 77
+  Valid  : Yes
+ ]
 ```
 
 **Look at `plots/experiment_1.png` and describe what you see (2–3 sentences).**  
 *Where does the biggest improvement happen? Does the curve flatten at some point?*
 ```
-[ YOUR OBSERVATION ]
+[The biggest improvement happens in the first 5-10 generations, where the best value jumps from 60 to 77. The curve then flattens around generation 10, indicating that the algorithm has converged to the optimal solution and further generations don't yield any improvement.
+ ]
 ```
 
 ---
@@ -83,20 +98,22 @@ Save plots as `experiment_2a.png`, `experiment_2b.png`, `experiment_2c.png`.
 **Results table:**
 
 | mutation_rate | Final best value | Weight (kg) | Valid? | Shape of curve |
-|--------------|-----------------|-------------|--------|----------------|
-| 0.01         |                 |             |        |                |
-| 0.05         |                 |             |        |                |
-| 0.30         |                 |             |        |                |
+|--------------|-----------------|-------------|--------|----------------  |
+| 0.01         |75|14.9|Yes|Steady improvement, then flattens quickly      |
+| 0.05         |77|14.4|Yes|Fast initial improvement, stabilizes early     |
+| 0.30         |78|14.1|Yes|Gradual improvement with more fluctuations     |
 
 **Compare the three plots. What happens when mutation is too low? Too high? (3–4 sentences)**  
 *Hint: Too low = no diversity, may get stuck. Too high = random search. What is the sweet spot?*
 ```
-[ YOUR OBSERVATION ]
+[When mutation rate is too low (0.01), the algorithm converges quickly but may get stuck in suboptimal solutions (value 75) because there's not enough diversity to explore better alternatives. When mutation rate is too high (0.30), the curve shows more fluctuations and takes longer to converge, but eventually reaches a slightly better value (78) - however, this comes at the cost of stability. The sweet spot appears to be around 0.05, which balances exploration and exploitation effectively.
+ ]
 ```
 
 **Which mutation_rate gave the best result? Why do you think that is?**
 ```
-[ YOUR ANSWER ]
+[The mutation_rate of 0.30 gave the highest final value (78). This is likely because the higher mutation rate allows the algorithm to explore more of the search space and escape local optima, eventually finding a slightly better packing combination (14.1 kg with value 78) than the baseline solution.
+ ]
 ```
 
 ---
@@ -107,12 +124,13 @@ Save plots as `experiment_2a.png`, `experiment_2b.png`, `experiment_2c.png`.
 
 | Experiment | Key setting | Final value | Main finding in one sentence |
 |------------|-------------|-------------|------------------------------|
-| 1 — Baseline | mutation_rate = 0.05 | | |
-| 2 — Mutation rate | mutation_rate = ___ | | |
+|1 — Baseline | mutation_rate=0.05 |77|The baseline mutation rate provides a good balance, quickly finding a high-value solution.|
+| 2 — Mutation rate | mutation_rate = ___ |78|Higher mutation rates enable more exploration and can discover marginally better solutions, but with more variability in convergence. |
 
 **In your own words — what is the most important thing you learned about Genetic Algorithms from these experiments? (3–5 sentences)**
 ```
-[ YOUR REFLECTION ]
+[ The most important thing I learned is that mutation rate is a critical parameter that controls the balance between exploration and exploitation in genetic algorithms. Too little mutation causes the algorithm to converge prematurely to suboptimal solutions, while too much mutation prevents stable convergence and makes the search more random. The experiments demonstrate that finding the right balance is essential - a moderate mutation rate (0.05) works well for many problems, but higher rates can occasionally find better solutions at the cost of stability. This trade-off shows why parameter tuning is such an important part of applying genetic algorithms effectively.
+ ]
 ```
 
 ---
